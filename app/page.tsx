@@ -9,7 +9,7 @@ export default async function Home() {
     limit: 5,
   });
 
-  console.log(products.data);
+  // console.log(products.data);
 
   return (
     <div>

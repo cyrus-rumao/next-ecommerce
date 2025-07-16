@@ -13,8 +13,8 @@ export const Carousel = ({ products }: Props) => {
       setCurrent((prev) => (prev + 1) % products.length);
     }, 3000); // change slide every 3 secs
     return () => clearInterval(interval);
-  }, [products.length]);
-
+	}, [products.length]);  
+	
   const currentProduct = products[current];
   const price = currentProduct.default_price as Stripe.Price;
   console.log("The price is : ", price);
