@@ -8,7 +8,9 @@ type Props = {
 };
 
 export default async function ProductPage({ params }: Props) {
-	const Product = await stripe.products.retrieve(params.id, {
+
+  const { id } = await params;
+	const Product = await stripe.products.retrieve(id, {
 		expand: ['default_price'],
 	});
 

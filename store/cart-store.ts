@@ -11,9 +11,11 @@ export interface CartItem {
 interface CartStore {
 	items: CartItem[];
 	addItem: (item: CartItem) => void;
+	removeItem: (id: string) => void;
+	clearCart: () => void;
 }
 
-export const UseCartStore = create<CartStore>()(
+export const useCartStore = create<CartStore>()(
 	persist(
 		(set) => ({
 			items: [],
@@ -33,6 +35,22 @@ export const UseCartStore = create<CartStore>()(
 							items: [...state.items, item],
 						};
 					}
+				}),
+			removeItem: (id) =>
+				set((state) => {
+					return {
+						items: state.items
+							.map((item) =>
+								item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+							)
+							.filter((item) => item.quantity > 0),
+					};
+				}),
+			clearCart: () =>
+				set(() => {
+					return {
+						items: [],
+					};
 				}),
 		}),
 		{

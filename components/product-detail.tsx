@@ -3,17 +3,29 @@
 import Stripe from 'stripe';
 import Image from 'next/image';
 import { Button } from './ui/button';
-import { UseCartStore } from '@/store/cart-store';
+import { useCartStore } from '@/store/cart-store';
 interface Props {
 	product: Stripe.Product;
 }
 export const ProductDetail = ({ product }: Props) => {
 
-	const { items, addItem } = UseCartStore();
+	const { items, addItem, removeItem } = useCartStore();
 	
 	const cartItem = items.find((item) => item.id === product.id);
 	const quantity = cartItem ? cartItem.quantity : 0;
 	const price = product.default_price as Stripe.Price;
+
+	function onAddItem() { 
+		addItem({
+			id: product.id,
+			name: product.name,
+			price: price.unit_amount ? price.unit_amount / 100 : 0,
+			quantity: 1,
+			imageUrl: product.images ? product.images[0] : null,
+		})
+	}
+
+	
 	return (
 		<div className='container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 items-center'>
 			{product.images && product.images[0] && (
@@ -40,10 +52,10 @@ export const ProductDetail = ({ product }: Props) => {
 						${(price.unit_amount / 100).toFixed(2)}
 					</p>
 				)}
-				<div className='flex items-center space-x-4'>
-          <Button variant={'outline'}> - </Button>
-          <span className='text-lg font-semibold'> {quantity} </span>
-					<Button > + </Button>
+				<div className='flex items-center space-x-6 group'>
+          <Button variant={'outline'} onClick={()=> removeItem(product.id)}> - </Button>
+          <span className='text-lg font-semibold '> {quantity} </span>
+					<Button onClick={onAddItem} className='group fixed ml-24'> + </Button>
 				</div>
 			</div>
 		</div>
