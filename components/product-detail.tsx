@@ -52,10 +52,10 @@ export const ProductDetail = ({ product }: Props) => {
 						${(price.unit_amount / 100).toFixed(2)}
 					</p>
 				)}
-				<div className='flex items-center space-x-6 group'>
+				<div className='flex items-center space-x-6'>
           <Button variant={'outline'} onClick={()=> removeItem(product.id)}> - </Button>
           <span className='text-lg font-semibold '> {quantity} </span>
-					<Button onClick={onAddItem} className='group fixed ml-24'> + </Button>
+					<Button onClick={onAddItem} > + </Button>
 				</div>
 			</div>
 		</div>
