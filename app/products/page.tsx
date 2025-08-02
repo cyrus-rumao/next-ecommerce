@@ -8,7 +8,6 @@ export default async function ProductsPage() {
 	// console.log(products.data);
 	return (
 		<div className="pb-8">
-			{/* <h1>teri mkc</h1> */}
 			<h1 className="text-3xl font-bold leading-none tracking-tight text-foreground text-center mb-8">
 				Products Page
 			</h1>

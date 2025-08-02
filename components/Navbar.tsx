@@ -35,7 +35,7 @@ export const Navbar = () => {
 				<Link
 					href="/"
 					className="hover:text-blue-600">
-					My Ecommerce
+					Next-Commerce
 				</Link>
 				<div className="hidden md:flex space-x-6">
 					<Link href="/">Home</Link>
@@ -52,7 +52,7 @@ export const Navbar = () => {
 				</div>
 
 				<div className="flex items-center space-x-4">
-					<div className='flex items-center space-x-2'>
+					<div className="flex items-center space-x-2">
 						{cartCount > 0 && (
 							<Link
 								className=""
